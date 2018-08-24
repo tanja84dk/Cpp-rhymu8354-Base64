@@ -4,7 +4,7 @@
 /**
  * @file Base64.hpp
  *
- * This module declares the Base64::Base64 functions.
+ * This module declares the Base64 functions.
  *
  * © 2018 by Richard Walters
  */
@@ -24,7 +24,7 @@ namespace Base64 {
      * @return
      *     The Base64 encoding of the given data is returned.
      */
-    std::string Base64Encode(const std::vector< uint8_t >& data);
+    std::string Encode(const std::vector< uint8_t >& data);
 
     /**
      * This function encodes the given data using the Base64 algorithm.
@@ -35,7 +35,7 @@ namespace Base64 {
      * @return
      *     The Base64 encoding of the given data is returned.
      */
-    std::string Base64Encode(const std::string& data);
+    std::string Encode(const std::string& data);
 
     /**
      * This function decodes the given data using the Base64 algorithm.
@@ -46,7 +46,7 @@ namespace Base64 {
      * @return
      *     The Base64 decoding of the given data is returned.
      */
-    std::string Base64Decode(const std::vector< uint8_t >& data);
+    std::string Decode(const std::vector< uint8_t >& data);
 
     /**
      * This function decodes the given data using the Base64 algorithm.
@@ -57,7 +57,7 @@ namespace Base64 {
      * @return
      *     The Base64 decoding of the given data is returned.
      */
-    std::string Base64Decode(const std::string& data);
+    std::string Decode(const std::string& data);
 
 }
 

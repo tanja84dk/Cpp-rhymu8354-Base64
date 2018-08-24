@@ -38,7 +38,7 @@ namespace {
 
 namespace Base64 {
 
-    std::string Base64Encode(const std::vector< uint8_t >& data) {
+    std::string Encode(const std::vector< uint8_t >& data) {
         std::ostringstream output;
         size_t bits = 0;
         uint32_t buffer = 0;
@@ -64,8 +64,8 @@ namespace Base64 {
         return output.str();
     }
 
-    std::string Base64Encode(const std::string& data) {
-        return Base64Encode(
+    std::string Encode(const std::string& data) {
+        return Encode(
             std::vector< uint8_t >(
                 data.begin(),
                 data.end()
@@ -73,7 +73,7 @@ namespace Base64 {
         );
     }
 
-    std::string Base64Decode(const std::vector< uint8_t >& data) {
+    std::string Decode(const std::vector< uint8_t >& data) {
         std::ostringstream output;
         uint32_t buffer = 0;
         size_t bits = 0;
@@ -97,8 +97,8 @@ namespace Base64 {
         return output.str();
     }
 
-    std::string Base64Decode(const std::string& data) {
-        return Base64Decode(
+    std::string Decode(const std::string& data) {
+        return Decode(
             std::vector< uint8_t >(
                 data.begin(),
                 data.end()

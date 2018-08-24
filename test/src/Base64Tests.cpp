@@ -28,11 +28,11 @@ TEST(Base64Tests, Base64EncodeDecode) {
     for (const auto& testVector: testVectors) {
         EXPECT_EQ(
             testVector.encoding,
-            Base64::Base64Encode(testVector.decoding)
+            Base64::Encode(testVector.decoding)
         );
         EXPECT_EQ(
             testVector.decoding,
-            Base64::Base64Decode(testVector.encoding)
+            Base64::Decode(testVector.encoding)
         );
     }
 }
