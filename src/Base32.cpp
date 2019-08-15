@@ -34,7 +34,10 @@ namespace {
 
 namespace Base32 {
 
-    std::string Encode(const std::vector< uint8_t >& data) {
+    std::string Encode(
+        const std::vector< uint8_t >& data,
+        bool omitPadding
+    ) {
         std::ostringstream output;
         size_t bits = 0;
         uint32_t buffer = 0;
@@ -51,29 +54,41 @@ namespace Base32 {
         if ((data.size() % 5) == 1) {
             buffer <<= 2;
             output << EncodingTable[buffer & 0x1f];
-            output << "======";
+            if (!omitPadding) {
+                output << "======";
+            }
         } else if ((data.size() % 5) == 2) {
             buffer <<= 4;
             output << EncodingTable[buffer & 0x1f];
-            output << "====";
+            if (!omitPadding) {
+                output << "====";
+            }
         } else if ((data.size() % 5) == 3) {
             buffer <<= 1;
             output << EncodingTable[buffer & 0x1f];
-            output << "===";
+            if (!omitPadding) {
+                output << "===";
+            }
         } else if ((data.size() % 5) == 4) {
             buffer <<= 3;
             output << EncodingTable[buffer & 0x1f];
-            output << '=';
+            if (!omitPadding) {
+                output << '=';
+            }
         }
         return output.str();
     }
 
-    std::string Encode(const std::string& data) {
+    std::string Encode(
+        const std::string& data,
+        bool omitPadding
+    ) {
         return Encode(
             std::vector< uint8_t >(
                 data.begin(),
                 data.end()
-            )
+            ),
+            omitPadding
         );
     }
 

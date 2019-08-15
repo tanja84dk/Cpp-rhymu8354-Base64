@@ -15,15 +15,16 @@ TEST(Base32Tests, Base32EncodeDecode) {
     struct TestVector {
         std::string decoding;
         std::string encoding;
+        std::string encodingWithoutPadding;
     };
     const std::vector< TestVector > testVectors{
-        {"", ""},
-        {"f", "MY======"},
-        {"fo", "MZXQ===="},
-        {"foo", "MZXW6==="},
-        {"foob", "MZXW6YQ="},
-        {"fooba", "MZXW6YTB"},
-        {"foobar", "MZXW6YTBOI======"},
+        {"", "", ""},
+        {"f", "MY======", "MY"},
+        {"fo", "MZXQ====", "MZXQ"},
+        {"foo", "MZXW6===", "MZXW6"},
+        {"foob", "MZXW6YQ=", "MZXW6YQ"},
+        {"fooba", "MZXW6YTB", "MZXW6YTB"},
+        {"foobar", "MZXW6YTBOI======", "MZXW6YTBOI"},
     };
     for (const auto& testVector: testVectors) {
         EXPECT_EQ(
@@ -33,6 +34,14 @@ TEST(Base32Tests, Base32EncodeDecode) {
         EXPECT_EQ(
             testVector.decoding,
             Base32::Decode(testVector.encoding)
+        );
+        EXPECT_EQ(
+            testVector.encodingWithoutPadding,
+            Base32::Encode(testVector.decoding, true)
+        );
+        EXPECT_EQ(
+            testVector.decoding,
+            Base32::Decode(testVector.encodingWithoutPadding)
         );
     }
 }

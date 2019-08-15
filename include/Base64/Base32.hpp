@@ -20,10 +20,17 @@ namespace Base32 {
      * @param[in] data
      *     This is the data to encode using the Base32 algorithm.
      *
+     * @param[in] omitPadding
+     *     If true, do not include padding characters at the end
+     *     of the encoding.
+     *
      * @return
      *     The Base32 encoding of the given data is returned.
      */
-    std::string Encode(const std::vector< uint8_t >& data);
+    std::string Encode(
+        const std::vector< uint8_t >& data,
+        bool omitPadding = false
+    );
 
     /**
      * This function encodes the given data using the Base32 algorithm.
@@ -31,10 +38,17 @@ namespace Base32 {
      * @param[in] data
      *     This is the data to encode using the Base32 algorithm.
      *
+     * @param[in] omitPadding
+     *     If true, do not include padding characters at the end
+     *     of the encoding.
+     *
      * @return
      *     The Base32 encoding of the given data is returned.
      */
-    std::string Encode(const std::string& data);
+    std::string Encode(
+        const std::string& data,
+        bool omitPadding = false
+    );
 
     /**
      * This function decodes the given data using the Base32 algorithm.
