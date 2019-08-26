@@ -36,3 +36,32 @@ TEST(Base64Tests, Base64EncodeDecode) {
         );
     }
 }
+
+TEST(Base64Tests, Base64UrlEncodeDecode) {
+    // These test vectors were taken from
+    // [RFC 4648](https://tools.ietf.org/html/rfc4648).
+    struct TestVector {
+        std::string decoding;
+        std::string encoding;
+    };
+    const std::vector< TestVector > testVectors{
+        {"", ""},
+        {"\xff", "_w"},
+        {"f\xff", "Zv8"},
+        {"fo\xff", "Zm__"},
+        {"foo\xff", "Zm9v_w"},
+        {"foob\xff", "Zm9vYv8"},
+        {"fooba\xff", "Zm9vYmH_"},
+        {"foobar\xff", "Zm9vYmFy_w"},
+    };
+    for (const auto& testVector: testVectors) {
+        EXPECT_EQ(
+            testVector.encoding,
+            Base64::UrlEncode(testVector.decoding)
+        );
+        EXPECT_EQ(
+            testVector.decoding,
+            Base64::UrlDecode(testVector.encoding)
+        );
+    }
+}
